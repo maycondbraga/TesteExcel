@@ -8,30 +8,21 @@ namespace TesteExcel
     {
         static void Main(string[] args)
         {
+            //Puxa o excel
             var xls = new XLWorkbook(@"C:\Users\Maycon\Downloads\MOCK_DATA.xlsx");
+            
+            //Pega a aba da planilha pelo nome
             var planilha = xls.Worksheets.First(w => w.Name == "data");
+            
+            //Pega o total de linhas
             var totalLinhas = planilha.Rows().Count();
 
-            // primeira linha é o cabecalho
-            for (int l = 2; l <= totalLinhas; l++)
+            //Inicia pelo 2 pois a primeira linha é o cabecalho
+            for (int linha = 2; linha <= totalLinhas; linha++)
             {
-                var codigo = planilha.Cell($"A{l}").Value.ToString();
-                var descricao = planilha.Cell($"B{l}").Value.ToString();
-                var preco = planilha.Cell($"C{l}").Value.ToString();
-                Console.WriteLine($"{codigo} - {descricao} - {preco}");
-            }
-
-            Console.WriteLine($"\nSEGUNDA ABA ----------------------------------------\n");
-
-            var planilha2 = xls.Worksheets.First(w => w.Name == "data2");
-            var totalLinhas2 = planilha.Rows().Count();
-
-            // primeira linha é o cabecalho
-            for (int l = 2; l <= totalLinhas2; l++)
-            {
-                var codigo = planilha2.Cell($"A{l}").Value.ToString();
-                var descricao = planilha2.Cell($"B{l}").Value.ToString();
-                var preco = planilha2.Cell($"C{l}").Value.ToString();
+                var codigo = planilha.Cell(linha, 1).Value.ToString();
+                var descricao = planilha.Cell(linha, 2).Value.ToString();
+                var preco = planilha.Cell(linha, 3).Value.ToString();
                 Console.WriteLine($"{codigo} - {descricao} - {preco}");
             }
         }
